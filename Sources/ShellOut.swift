@@ -383,7 +383,11 @@ private extension Process {
         }
         #endif
 
-        launch()
+        if #available(OSX 10.13, *) {
+            try run()
+        } else {
+            launch()
+        }
 
         #if os(Linux)
         outputQueue.sync {
